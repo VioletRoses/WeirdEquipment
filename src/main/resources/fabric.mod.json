@@ -19,9 +19,6 @@
     ],
     "main": [
       "xyz.venividivivi.weirdequipment.WeirdEquipment"
-    ],
-    "dynamiclights": [
-      "xyz.venividivivi.weirdequipment.addons.DynamicLightsAddon"
     ]
   },
   "mixins": [
