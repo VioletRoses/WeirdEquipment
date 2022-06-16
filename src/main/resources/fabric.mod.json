@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "weirdequipment",
+  "version": "${version}",
+  "name": "WeirdEquipment",
+  "description": "A collection of strange tools, weapons, and armor, meant to fit in with vanilla.",
+  "authors": [
+    "VioletRoses"
+  ],
+  "contact": {
+    "website": "venividivivi.xyz"
+  },
+  "license": "MIT",
+  "icon": "assets/weirdequipment/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "xyz.venividivivi.weirdequipment.client.WeirdEquipmentClient"
+    ],
+    "main": [
+      "xyz.venividivivi.weirdequipment.WeirdEquipment"
+    ],
+    "dynamiclights": [
+      "xyz.venividivivi.weirdequipment.addons.DynamicLightsAddon"
+    ]
+  },
+  "mixins": [
+    "weirdequipment.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}
