@@ -11,7 +11,7 @@
     "website": "venividivivi.xyz"
   },
   "license": "MIT",
-  "icon": "assets/weirdequipment/icon.png",
+  "icon": "assets/weird_equipment/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
