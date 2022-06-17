@@ -15,7 +15,6 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "xyz.venividivivi.weirdequipment.client.WeirdEquipmentClient"
     ],
     "main": [
       "xyz.venividivivi.weirdequipment.WeirdEquipment"
