@@ -13,7 +13,7 @@ public class PumpkinArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        return 2;
+        return 1;
     }
 
     @Override
