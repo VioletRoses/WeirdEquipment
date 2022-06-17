@@ -8,17 +8,17 @@ import net.minecraft.sound.SoundEvent;
 public class PumpkinArmorMaterial implements ArmorMaterial {
     @Override
     public int getDurability(EquipmentSlot slot) {
-        return 0;
+        return 150;
     }
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        return 0;
+        return 2;
     }
 
     @Override
     public int getEnchantability() {
-        return 0;
+        return 8;
     }
 
     @Override
