@@ -33,7 +33,7 @@ public class PumpkinArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return null;
+        return "pumpkin";
     }
 
     @Override
