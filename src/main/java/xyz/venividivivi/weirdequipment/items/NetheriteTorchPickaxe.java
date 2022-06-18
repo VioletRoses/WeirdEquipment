@@ -9,11 +9,14 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class NetheriteTorchPickaxe extends PickaxeItem {
     public NetheriteTorchPickaxe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
@@ -39,8 +42,10 @@ public class NetheriteTorchPickaxe extends PickaxeItem {
                     }
             }
             if (block.canPlaceAt(blockState, world, blockPos)) {
-                world.setBlockState(blockPos, blockState);
                 PlayerEntity playerEntity = context.getPlayer();
+                world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.9f);
+                world.setBlockState(blockPos, blockState);
+                world.emitGameEvent(playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
                 if (playerEntity instanceof ServerPlayerEntity) {
                     context.getStack().damage(5, playerEntity, (p) -> {
                         p.sendToolBreakStatus(context.getHand());
