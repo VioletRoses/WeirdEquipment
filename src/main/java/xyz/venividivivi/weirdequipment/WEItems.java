@@ -8,6 +8,7 @@ import net.minecraft.util.registry.Registry;
 import xyz.venividivivi.weirdequipment.items.CactusSword;
 import xyz.venividivivi.weirdequipment.items.FlintAndShears;
 import xyz.venividivivi.weirdequipment.items.NetheriteTorchPickaxe;
+import xyz.venividivivi.weirdequipment.items.TorchBow;
 import xyz.venividivivi.weirdequipment.materials.CactusMaterial;
 import xyz.venividivivi.weirdequipment.materials.PumpkinArmorMaterial;
 
@@ -18,8 +19,9 @@ public class WEItems {
 
     //Tools
     public static final Item NETHERITE_TORCH_PICKAXE = new NetheriteTorchPickaxe(ToolMaterials.NETHERITE, 1, -2.8f, new FabricItemSettings().group(ItemGroup.TOOLS));
-
+    public static final Item TORCH_BOW = new TorchBow(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(300));
     public static final Item FLINT_AND_SHEARS = new FlintAndShears(new FabricItemSettings().maxDamage(300).group(ItemGroup.TOOLS));
+
     //Armor
     public static final Item JACK_O_HELMET = new ArmorItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
 
@@ -32,6 +34,7 @@ public class WEItems {
         Registry.register(Registry.ITEM, new Identifier("weird_equipment", "dirt_sword"), DIRT_SWORD);
         //Tools
         Registry.register(Registry.ITEM, new Identifier("weird_equipment", "netherite_torch_pickaxe"), NETHERITE_TORCH_PICKAXE);
+        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "torch_bow"), TORCH_BOW);
         Registry.register(Registry.ITEM, new Identifier("weird_equipment", "flint_and_shears"), FLINT_AND_SHEARS);
         //Armor
         Registry.register(Registry.ITEM, new Identifier("weird_equipment", "jack_o_helmet"), JACK_O_HELMET);

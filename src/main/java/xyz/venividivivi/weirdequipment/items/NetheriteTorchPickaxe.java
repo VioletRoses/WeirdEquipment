@@ -12,7 +12,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -26,13 +25,14 @@ public class NetheriteTorchPickaxe extends PickaxeItem {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos().offset(context.getSide());
-        BlockState blockState = null;
-        Block block = null;
-            switch(context.getSide()) {
+        Direction side = context.getSide();
+        BlockPos blockPos = context.getBlockPos().offset(side);
+        BlockState blockState;
+        Block block;
+            switch(side) {
                 case NORTH, EAST, SOUTH, WEST:
                     block = Blocks.WALL_TORCH;
-                    blockState = block.getDefaultState().with(WallTorchBlock.FACING, context.getSide());
+                    blockState = block.getDefaultState().with(WallTorchBlock.FACING, side);
                     break;
                 default:
                     block = Blocks.TORCH;
