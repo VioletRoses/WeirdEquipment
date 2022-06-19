@@ -51,7 +51,7 @@ public class NetheriteTorchPickaxe extends PickaxeItem {
                         p.sendToolBreakStatus(context.getHand());
                     });
                 }
-                return ActionResult.PASS;
+                return ActionResult.SUCCESS;
             }
         return super.useOnBlock(context);
     }
