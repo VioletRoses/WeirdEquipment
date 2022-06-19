@@ -13,8 +13,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import xyz.venividivivi.weirdequipment.entity.TorchArrowEntity;
 
-public class TorchBow extends BowItem {
-    public TorchBow(Settings settings) {
+public class TorchBowItem extends BowItem {
+    public TorchBowItem(Settings settings) {
         super(settings);
     }
 

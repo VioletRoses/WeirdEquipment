@@ -1,13 +1,13 @@
 package xyz.venividivivi.weirdequipment;
 
 import net.fabricmc.api.ModInitializer;
-import xyz.venividivivi.weirdequipment.registry.WEEntityTypes;
-import xyz.venividivivi.weirdequipment.registry.WEItems;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 public class WeirdEquipment implements ModInitializer {
     @Override
     public void onInitialize() {
-        WEItems.register();
-        WEEntityTypes.register();
+        WeirdEquipmentItems.register();
+        WeirdEquipmentEntityTypes.register();
     }
 }

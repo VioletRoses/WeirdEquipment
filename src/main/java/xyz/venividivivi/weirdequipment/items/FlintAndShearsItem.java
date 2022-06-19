@@ -13,8 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class FlintAndShears extends ShearsItem {
-    public FlintAndShears(Settings settings) {
+public class FlintAndShearsItem extends ShearsItem {
+    public FlintAndShearsItem(Settings settings) {
         super(settings);
     }
     @Override

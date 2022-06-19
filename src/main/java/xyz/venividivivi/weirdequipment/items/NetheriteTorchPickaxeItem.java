@@ -17,8 +17,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class NetheriteTorchPickaxe extends PickaxeItem {
-    public NetheriteTorchPickaxe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+public class NetheriteTorchPickaxeItem extends PickaxeItem {
+    public NetheriteTorchPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 

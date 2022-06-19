@@ -2,13 +2,12 @@ package xyz.venividivivi.weirdequipment.items;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 
-public class CactusSword extends SwordItem {
-    public CactusSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+public class CactusSwordItem extends SwordItem {
+    public CactusSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
