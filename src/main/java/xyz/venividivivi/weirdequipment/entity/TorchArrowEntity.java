@@ -70,12 +70,16 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        return null;
+        return new ItemStack(Items.TORCH);
     }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(Items.TORCH, 1)));
+        Entity entity = entityHitResult.getEntity();
+        if (entityHitResult.getEntity() instanceof LivingEntity) {
+            entity.setOnFire(true);
+            entity.setOnFireFor(5);
+        } else world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(Items.TORCH, 1)));
         remove(RemovalReason.DISCARDED);
     }
 }
