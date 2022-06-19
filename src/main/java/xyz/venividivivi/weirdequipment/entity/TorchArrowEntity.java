@@ -27,6 +27,7 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
 
     public World world;
     public PlayerEntity playerEntity;
+    public int fireTime = 3;
 
     public TorchArrowEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -79,7 +80,7 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getEntity() instanceof LivingEntity) {
             entity.setOnFire(true);
-            entity.setOnFireFor(3);
+            entity.setOnFireFor(fireTime);
             entity.damage(DamageSource.arrow(this, this.getOwner()), (float) getDamage());
         } else world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(Items.TORCH, 1)));
         remove(RemovalReason.DISCARDED);

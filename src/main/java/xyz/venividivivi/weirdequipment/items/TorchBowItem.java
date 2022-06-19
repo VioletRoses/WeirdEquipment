@@ -52,7 +52,7 @@ public class TorchBowItem extends BowItem {
                         int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
                         if (punchLevel > 0) torchArrowEntity.setPunch(punchLevel);
 
-                        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) torchArrowEntity.setOnFireFor(100);
+                        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) torchArrowEntity.fireTime = 6;
 
                         world.spawnEntity(torchArrowEntity);
                         if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode) {
