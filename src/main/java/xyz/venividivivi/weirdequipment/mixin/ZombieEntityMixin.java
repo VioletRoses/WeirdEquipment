@@ -10,7 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import xyz.venividivivi.weirdequipment.WEItems;
+import xyz.venividivivi.weirdequipment.registry.WEItems;
 
 @Mixin (ZombieEntity.class)
 public class ZombieEntityMixin extends MobEntity {

@@ -39,7 +39,6 @@ public class TorchBow extends BowItem {
                     boolean isCreativeAndHasTorch = isCreative && itemStack.isOf(Items.TORCH);
                     if (!world.isClient) {
                         TorchArrowEntity torchArrowEntity = new TorchArrowEntity(world, playerEntity);
-                        torchArrowEntity.initFromStack(itemStack);
                         torchArrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
                         stack.damage(1, playerEntity, (p) -> {
                             p.sendToolBreakStatus(playerEntity.getActiveHand());

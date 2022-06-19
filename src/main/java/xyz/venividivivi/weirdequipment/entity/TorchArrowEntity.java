@@ -4,10 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
@@ -18,17 +20,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import xyz.venividivivi.weirdequipment.registry.WEEntityTypes;
 
-public class TorchArrowEntity extends ArrowEntity {
+public class TorchArrowEntity extends PersistentProjectileEntity {
 
     public World world;
     public PlayerEntity playerEntity;
 
+    public TorchArrowEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+        super(entityType, world);
+        this.world = world;
+    }
+
     public TorchArrowEntity(World world, LivingEntity owner) {
-        super(world, owner);
+        super(WEEntityTypes.TORCH_ARROW, owner, world);
         this.world = world;
         playerEntity = (PlayerEntity) owner;
     }
+
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
@@ -57,6 +66,11 @@ public class TorchArrowEntity extends ArrowEntity {
         }
         remove(RemovalReason.DISCARDED);
         super.onBlockHit(blockHitResult);
+    }
+
+    @Override
+    protected ItemStack asItemStack() {
+        return null;
     }
 
     @Override

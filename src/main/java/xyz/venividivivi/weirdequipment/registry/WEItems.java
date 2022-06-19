@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment;
+package xyz.venividivivi.weirdequipment.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
