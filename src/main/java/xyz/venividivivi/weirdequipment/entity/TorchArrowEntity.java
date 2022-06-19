@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -78,7 +79,8 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
         Entity entity = entityHitResult.getEntity();
         if (entityHitResult.getEntity() instanceof LivingEntity) {
             entity.setOnFire(true);
-            entity.setOnFireFor(5);
+            entity.setOnFireFor(3);
+            entity.damage(DamageSource.arrow(this, this.getOwner()), (float) getDamage());
         } else world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(Items.TORCH, 1)));
         remove(RemovalReason.DISCARDED);
     }

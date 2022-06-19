@@ -8,6 +8,6 @@ import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 public class DynamicLightsAddon implements DynamicLightsInitializer {
     @Override
     public void onInitializeDynamicLights() {
-        DynamicLightHandlers.registerDynamicLightHandler((EntityType) WeirdEquipmentEntityTypes.TORCH_ARROW, lightSource -> 10);
+        DynamicLightHandlers.registerDynamicLightHandler((EntityType) WeirdEquipmentEntityTypes.TORCH_ARROW, lightSource -> 12);
     }
 }

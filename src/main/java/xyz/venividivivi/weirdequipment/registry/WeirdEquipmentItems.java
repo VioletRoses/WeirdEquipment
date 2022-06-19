@@ -19,7 +19,7 @@ public class WeirdEquipmentItems {
 
     //Tools
     public static final Item NETHERITE_TORCH_PICKAXE = new NetheriteTorchPickaxeItem(ToolMaterials.NETHERITE, 1, -2.8f, new FabricItemSettings().group(ItemGroup.TOOLS));
-    public static final Item TORCH_BOW = new TorchBowItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(300));
+    public static final Item TORCH_BOW = new TorchBowItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(384));
     public static final Item FLINT_AND_SHEARS = new FlintAndShearsItem(new FabricItemSettings().maxDamage(300).group(ItemGroup.TOOLS));
 
     //Armor

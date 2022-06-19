@@ -1,5 +1,7 @@
 package xyz.venividivivi.weirdequipment.items;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -23,12 +25,12 @@ public class TorchBowItem extends BowItem {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
-            boolean isCreative = playerEntity.getAbilities().creativeMode;
+            boolean isCreativeOrInfinity = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
             if(torchStack == null) {
                 return;
             }
             ItemStack itemStack = torchStack;
-            if (!itemStack.isEmpty() || isCreative) {
+            if (!itemStack.isEmpty() || isCreativeOrInfinity) {
                 if (itemStack.isEmpty()) {
                     itemStack = new ItemStack(Items.TORCH);
                 }
@@ -36,15 +38,24 @@ public class TorchBowItem extends BowItem {
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
                 float f = getPullProgress(i);
                 if (!((double) f < 0.1)) {
-                    boolean isCreativeAndHasTorch = isCreative && itemStack.isOf(Items.TORCH);
+                    boolean isCreativeAndHasAmmo = isCreativeOrInfinity && itemStack.isOf(Items.TORCH);
                     if (!world.isClient) {
                         TorchArrowEntity torchArrowEntity = new TorchArrowEntity(world, playerEntity);
+                        torchArrowEntity.setDamage(1.0f);
                         torchArrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
-                        stack.damage(1, playerEntity, (p) -> {
-                            p.sendToolBreakStatus(playerEntity.getActiveHand());
-                        });
+                        stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
+                        if(f == 1.0f) torchArrowEntity.setCritical(true);
+
+                        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
+                        if (powerLevel > 0) torchArrowEntity.setDamage(torchArrowEntity.getDamage() + (double)powerLevel * 0.5 + 0.5);
+
+                        int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
+                        if (punchLevel > 0) torchArrowEntity.setPunch(punchLevel);
+
+                        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) torchArrowEntity.setOnFireFor(100);
+
                         world.spawnEntity(torchArrowEntity);
-                        if (!isCreativeAndHasTorch && !playerEntity.getAbilities().creativeMode) {
+                        if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode) {
                             itemStack.decrement(1);
                             if (itemStack.isEmpty()) {
                                 playerEntity.getInventory().removeOne(itemStack);
@@ -62,7 +73,7 @@ public class TorchBowItem extends BowItem {
         Inventory inventory = user.getInventory();
         for(int i = 0; i < inventory.size(); ++i) {
             ItemStack itemStack = inventory.getStack(i);
-            if (inventory.getStack(i).getItem().equals(Items.TORCH) || user.getAbilities().creativeMode) {
+            if (inventory.getStack(i).getItem().equals(Items.TORCH) || user.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, user.getStackInHand(hand)) > 0) {
                 torchStack = itemStack;
                 user.setCurrentHand(hand);
                 return TypedActionResult.consume(user.getStackInHand(hand));
