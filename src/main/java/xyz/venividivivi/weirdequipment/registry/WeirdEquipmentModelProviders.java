@@ -1,18 +1,19 @@
 package xyz.venividivivi.weirdequipment.registry;
 
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.util.Identifier;
 
+import static net.minecraft.client.item.ModelPredicateProviderRegistry.*;
+
 public class WeirdEquipmentModelProviders {
-    public static void register() {
-        ModelPredicateProviderRegistry.register(WeirdEquipmentItems.TORCH_BOW, new Identifier("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
+    public static void init() {
+        register(WeirdEquipmentItems.TORCH_BOW, new Identifier("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
             if (livingEntity == null) {
                 return 0.0F;
             }
             return livingEntity.getActiveItem() != itemStack ? 0.0F : (itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft()) / 20.0F;
         });
 
-        ModelPredicateProviderRegistry.register(WeirdEquipmentItems.TORCH_BOW, new Identifier("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
+        register(WeirdEquipmentItems.TORCH_BOW, new Identifier("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
             if (livingEntity == null) {
                 return 0.0F;
             }

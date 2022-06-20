@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment.materials;
+package xyz.venividivivi.weirdequipment.material;
 
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;

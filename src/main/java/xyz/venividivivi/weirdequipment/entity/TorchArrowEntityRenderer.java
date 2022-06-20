@@ -4,6 +4,8 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.util.Identifier;
 
+import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
+
 public class TorchArrowEntityRenderer extends ProjectileEntityRenderer<TorchArrowEntity> {
     public TorchArrowEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
@@ -11,6 +13,6 @@ public class TorchArrowEntityRenderer extends ProjectileEntityRenderer<TorchArro
 
     @Override
     public Identifier getTexture(TorchArrowEntity entity) {
-        return new Identifier("weird_equipment", "textures/entity/projectiles/torch_arrow.png");
+        return new Identifier(MODID, "textures/entity/projectiles/torch_arrow.png");
     }
 }

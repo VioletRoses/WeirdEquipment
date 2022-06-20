@@ -7,7 +7,7 @@ import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentModelProviders;
 public class WeirdEquipmentClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        WeirdEquipmentEntityRenderers.register();
-        WeirdEquipmentModelProviders.register();
+        WeirdEquipmentEntityRenderers.init();
+        WeirdEquipmentModelProviders.init();
     }
 }

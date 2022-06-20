@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment.items;
+package xyz.venividivivi.weirdequipment.item;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;

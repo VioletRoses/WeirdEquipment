@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment.items;
+package xyz.venividivivi.weirdequipment.item;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;

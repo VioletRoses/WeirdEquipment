@@ -4,13 +4,12 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import xyz.venividivivi.weirdequipment.items.CactusSwordItem;
-import xyz.venividivivi.weirdequipment.items.FlintAndShearsItem;
-import xyz.venividivivi.weirdequipment.items.NetheriteTorchPickaxeItem;
-import xyz.venividivivi.weirdequipment.items.TorchBowItem;
-import xyz.venividivivi.weirdequipment.materials.CactusMaterial;
-import xyz.venividivivi.weirdequipment.materials.PumpkinArmorMaterial;
+import xyz.venividivivi.weirdequipment.item.*;
+import xyz.venividivivi.weirdequipment.material.CactusMaterial;
+import xyz.venividivivi.weirdequipment.material.PumpkinArmorMaterial;
+
+import static net.minecraft.util.registry.Registry.*;
+import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
 
 public class WeirdEquipmentItems {
     //Weapons
@@ -25,20 +24,25 @@ public class WeirdEquipmentItems {
     //Armor
     public static final Item JACK_O_HELMET = new ArmorItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
 
+    //Consumables
+    public static final Item ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32));
+
     //Resources
     public static final Item TORCH_CORE = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
-    public static void register() {
+    public static void init() {
         //Weapons
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "cactus_sword"), CACTUS_SWORD);
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "dirt_sword"), DIRT_SWORD);
+        register(ITEM, new Identifier(MODID, "cactus_sword"), CACTUS_SWORD);
+        register(ITEM, new Identifier(MODID, "dirt_sword"), DIRT_SWORD);
         //Tools
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "netherite_torch_pickaxe"), NETHERITE_TORCH_PICKAXE);
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "torch_bow"), TORCH_BOW);
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "flint_and_shears"), FLINT_AND_SHEARS);
+        register(ITEM, new Identifier(MODID, "netherite_torch_pickaxe"), NETHERITE_TORCH_PICKAXE);
+        register(ITEM, new Identifier(MODID, "torch_bow"), TORCH_BOW);
+        register(ITEM, new Identifier(MODID, "flint_and_shears"), FLINT_AND_SHEARS);
         //Armor
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "jack_o_helmet"), JACK_O_HELMET);
+        register(ITEM, new Identifier(MODID, "jack_o_helmet"), JACK_O_HELMET);
+        //Consumables
+        register(ITEM, new Identifier(MODID, "rope_coil"), ROPE_COIL);
         //Resources
-        Registry.register(Registry.ITEM, new Identifier("weird_equipment", "torch_core"), TORCH_CORE);
+        register(ITEM, new Identifier(MODID, "torch_core"), TORCH_CORE);
     }
 }

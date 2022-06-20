@@ -5,9 +5,10 @@ import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 public class WeirdEquipment implements ModInitializer {
+    public static String MODID = "weird_equipment";
     @Override
     public void onInitialize() {
-        WeirdEquipmentItems.register();
-        WeirdEquipmentEntityTypes.register();
+        WeirdEquipmentItems.init();
+        WeirdEquipmentEntityTypes.init();
     }
 }
