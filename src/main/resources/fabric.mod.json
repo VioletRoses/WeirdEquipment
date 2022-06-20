@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "weirdequipment",
   "version": "${version}",
-  "name": "WeirdEquipment",
+  "name": "Weird Equipment",
   "description": "A collection of strange tools, weapons, and armor, meant to fit in with vanilla.",
   "authors": [
     "VioletRoses"
