@@ -1,11 +1,13 @@
 package xyz.venividivivi.weirdequipment.registry;
 
-import xyz.venividivivi.weirdequipment.entity.TorchArrowEntityRenderer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import xyz.venividivivi.weirdequipment.entity.renderer.TorchArrowEntityRenderer;
 
 import static net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.*;
 
 public class WeirdEquipmentEntityRenderers {
     public static void init() {
-        register(WeirdEquipmentEntityTypes.TORCH_ARROW, (context) -> new TorchArrowEntityRenderer(context));
+        register(WeirdEquipmentEntityTypes.TORCH_ARROW, TorchArrowEntityRenderer::new);
+        register(WeirdEquipmentEntityTypes.ROPE_COIL, FlyingItemEntityRenderer::new);
     }
 }

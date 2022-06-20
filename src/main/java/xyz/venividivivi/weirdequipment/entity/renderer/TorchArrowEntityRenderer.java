@@ -1,8 +1,9 @@
-package xyz.venividivivi.weirdequipment.entity;
+package xyz.venividivivi.weirdequipment.entity.renderer;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.util.Identifier;
+import xyz.venividivivi.weirdequipment.entity.TorchArrowEntity;
 
 import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
 
