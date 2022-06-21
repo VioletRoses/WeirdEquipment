@@ -12,6 +12,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentBlocks;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
@@ -38,7 +39,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
             Direction side = blockHitResult.getSide();
             blockPos = blockHitResult.getBlockPos().offset(side);
             if (world.getBlockState(blockPos).isAir() && side != Direction.UP) {
-                world.setBlockState(blockPos, Blocks.OAK_FENCE.getDefaultState());
+                world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
                 this.setNoGravity(true);
                 this.setVelocity(0, 0, 0, 0f, 0f);
                 isPlacing = true;
@@ -61,7 +62,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
             i = 0;
             if (isPlacing && blockPos != null) {
                 if (world.getBlockState(blockPos = blockPos.offset(Direction.DOWN)).isAir() && j <= 18) {
-                    world.setBlockState(blockPos, Blocks.OAK_FENCE.getDefaultState());
+                    world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
                     j++;
                 } else {
                     remove(RemovalReason.DISCARDED);
