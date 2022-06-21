@@ -1,5 +1,6 @@
 package xyz.venividivivi.weirdequipment.entity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -41,19 +42,21 @@ public class RopeCoilEntity extends ThrownItemEntity {
             if (world.getBlockState(blockPos).isAir() && side != Direction.UP) {
                 switch (side) {
                     case NORTH, EAST, WEST, SOUTH:
-                        world.setBlockState(blockPos, WeirdEquipmentBlocks.WALL_ROPE.getDefaultState().with(WallRopeBlock.FACING, side.getOpposite()));
+                        BlockState blockState = WeirdEquipmentBlocks.WALL_ROPE.getDefaultState().with(WallRopeBlock.FACING, side.getOpposite());
+                        if (WeirdEquipmentBlocks.WALL_ROPE.canPlaceAt(blockState, world, blockPos)) {
+                            world.setBlockState(blockPos, blockState);
+                        } else dropItem();
                         break;
                     case DOWN:
-                        world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
+                        if (WeirdEquipmentBlocks.ROPE.canPlaceAt(WeirdEquipmentBlocks.ROPE.getDefaultState(), world, blockPos)) {
+                            world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
+                        } else dropItem();
                         break;
                 }
                 this.setNoGravity(true);
                 this.setVelocity(0, 0, 0, 0f, 0f);
                 isPlacing = true;
-            } else {
-                world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(WeirdEquipmentItems.ROPE_COIL, 1)));
-                remove(RemovalReason.DISCARDED);
-            }
+            } else dropItem();
         }
     }
 
@@ -79,6 +82,10 @@ public class RopeCoilEntity extends ThrownItemEntity {
         super.tick();
     }
 
+    public void dropItem() {
+        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(WeirdEquipmentItems.ROPE_COIL, 1)));
+        remove(RemovalReason.DISCARDED);
+    }
     @Override
     protected Item getDefaultItem() {
         return WeirdEquipmentItems.ROPE_COIL;

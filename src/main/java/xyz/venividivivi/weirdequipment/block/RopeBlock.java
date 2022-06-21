@@ -11,6 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentBlocks;
 
 public class RopeBlock extends Block {
@@ -18,10 +19,13 @@ public class RopeBlock extends Block {
         super(settings);
     }
 
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return world.getBlockState(pos.offset(Direction.UP)).isSideSolid(world, pos, Direction.DOWN, SideShapeType.CENTER);
+    }
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        System.out.println(world.getBlockState(pos).getBlock());
         if (!world.getBlockState(pos.offset(Direction.UP)).isSideSolid(world, pos.offset(Direction.UP), Direction.DOWN, SideShapeType.CENTER)) {
             world.createAndScheduleBlockTick(pos, WeirdEquipmentBlocks.ROPE, 1);
         }

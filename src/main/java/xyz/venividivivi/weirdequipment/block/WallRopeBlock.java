@@ -1,18 +1,22 @@
 package xyz.venividivivi.weirdequipment.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentBlocks;
 
 public class WallRopeBlock extends HorizontalFacingBlock {
     public WallRopeBlock(Settings settings) {
@@ -20,12 +24,43 @@ public class WallRopeBlock extends HorizontalFacingBlock {
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH));
     }
 
+    @Nullable
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState blockState = this.getDefaultState();
+        WorldView worldView = ctx.getWorld();
+        BlockPos blockPos = ctx.getBlockPos();
+        Direction side = ctx.getSide();
+        if (side.getAxis().isHorizontal()) {
+            if (blockState.with(FACING, side.getOpposite()).canPlaceAt(worldView, blockPos)) {
+                return blockState.with(FACING, side.getOpposite());
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         Direction direction = state.get(FACING);
-        BlockPos blockPos = pos.offset(direction.getOpposite());
+        BlockPos blockPos = pos.offset(direction);
         BlockState blockState = world.getBlockState(blockPos);
         return blockState.isSideSolidFullSquare(world, blockPos, direction);
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        Direction side = state.get(FACING);
+        if (!world.getBlockState(pos.offset(side)).isSideSolid(world, pos.offset(side), side.getOpposite(), SideShapeType.CENTER)) {
+            world.createAndScheduleBlockTick(pos, WeirdEquipmentBlocks.WALL_ROPE, 1);
+        }
+        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(WeirdEquipmentBlocks.ROPE, 1)));
+        super.scheduledTick(state, world, pos, random);
     }
 
     @Override
@@ -45,10 +80,5 @@ public class WallRopeBlock extends HorizontalFacingBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(FACING);
-    }
-
-    @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
     }
 }
