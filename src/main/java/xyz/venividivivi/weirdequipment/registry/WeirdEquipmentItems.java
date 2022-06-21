@@ -25,9 +25,12 @@ public class WeirdEquipmentItems {
     public static final Item JACK_O_HELMET = new ArmorItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
 
     //Consumables
-    public static final Item ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32));
+    public static final Item SMALL_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 9);
+
+    public static final Item LARGE_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 27);
 
     //Resources
+    public static final Item ROPE = new WallHangingBlockItem(WeirdEquipmentBlocks.ROPE, WeirdEquipmentBlocks.WALL_ROPE, new FabricItemSettings().group(ItemGroup.MISC));
     public static final Item TORCH_CORE = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
     public static void init() {
@@ -41,8 +44,10 @@ public class WeirdEquipmentItems {
         //Armor
         register(ITEM, new Identifier(MODID, "jack_o_helmet"), JACK_O_HELMET);
         //Consumables
-        register(ITEM, new Identifier(MODID, "rope_coil"), ROPE_COIL);
+        register(ITEM, new Identifier(MODID, "small_rope_coil"), SMALL_ROPE_COIL);
+        register(ITEM, new Identifier(MODID, "large_rope_coil"), LARGE_ROPE_COIL);
         //Resources
+        register(ITEM, new Identifier(MODID, "rope"), ROPE);
         register(ITEM, new Identifier(MODID, "torch_core"), TORCH_CORE);
     }
 }

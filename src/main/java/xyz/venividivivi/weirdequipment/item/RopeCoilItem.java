@@ -11,8 +11,10 @@ import net.minecraft.world.World;
 import xyz.venividivivi.weirdequipment.entity.RopeCoilEntity;
 
 public class RopeCoilItem extends Item {
-    public RopeCoilItem(Settings settings) {
+    protected final int count;
+    public RopeCoilItem(Settings settings, int count) {
         super(settings);
+        this.count = count;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class RopeCoilItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            RopeCoilEntity ropeCoilEntity = new RopeCoilEntity(world, user);
+            RopeCoilEntity ropeCoilEntity = new RopeCoilEntity(world, user, count);
             ropeCoilEntity.setItem(itemStack);
             ropeCoilEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             world.spawnEntity(ropeCoilEntity);

@@ -21,15 +21,24 @@ public class RopeCoilEntity extends ThrownItemEntity {
     public World world;
     public boolean isPlacing = false;
     BlockPos blockPos = null;
-    int i = 0, j = 1;
+    int i = 0, j = 1, count;
+    Item parentItem;
 
-    public RopeCoilEntity(World world, LivingEntity owner) {
+    public RopeCoilEntity(World world, LivingEntity owner, int count) {
         super(WeirdEquipmentEntityTypes.ROPE_COIL, owner, world);
+        this.count = count;
+        if (count == 9) {
+            parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
+        } else if (count == 27) {
+            parentItem = WeirdEquipmentItems.LARGE_ROPE_COIL;
+        }
         this.world = world;
     }
 
     public RopeCoilEntity(EntityType<RopeCoilEntity> ropeCoilEntityEntityType, World world) {
         super(ropeCoilEntityEntityType, world);
+        this.count = 0;
+        parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
         this.world = world;
     }
 
@@ -55,6 +64,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
                 }
                 this.setNoGravity(true);
                 this.setVelocity(0, 0, 0, 0f, 0f);
+                count--;
                 isPlacing = true;
             } else dropItem();
         }
@@ -62,7 +72,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(WeirdEquipmentItems.ROPE_COIL, 1)));
+        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(parentItem, 1)));
         remove(RemovalReason.DISCARDED);
     }
 
@@ -71,9 +81,12 @@ public class RopeCoilEntity extends ThrownItemEntity {
         if (i == 2) {
             i = 0;
             if (isPlacing && blockPos != null) {
-                if (world.getBlockState(blockPos = blockPos.offset(Direction.DOWN)).isAir() && j <= 18) {
+                if (world.getBlockState(blockPos = blockPos.offset(Direction.DOWN)).isAir() && count > 0) {
                     world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
-                    j++;
+                    count--;
+                } else if (count > 0) {
+                    world.spawnEntity(new ItemEntity(world, blockPos.getX(), blockPos.getY() + 1.5, blockPos.getZ(), new ItemStack(WeirdEquipmentItems.ROPE, count)));
+                    remove(RemovalReason.DISCARDED);
                 } else {
                     remove(RemovalReason.DISCARDED);
                 }
@@ -83,11 +96,11 @@ public class RopeCoilEntity extends ThrownItemEntity {
     }
 
     public void dropItem() {
-        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(WeirdEquipmentItems.ROPE_COIL, 1)));
+        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(parentItem, 1)));
         remove(RemovalReason.DISCARDED);
     }
     @Override
     protected Item getDefaultItem() {
-        return WeirdEquipmentItems.ROPE_COIL;
+        return parentItem;
     }
 }
