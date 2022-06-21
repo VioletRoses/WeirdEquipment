@@ -1,6 +1,5 @@
 package xyz.venividivivi.weirdequipment.entity;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -12,6 +11,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import xyz.venividivivi.weirdequipment.block.WallRopeBlock;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentBlocks;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
@@ -39,7 +39,14 @@ public class RopeCoilEntity extends ThrownItemEntity {
             Direction side = blockHitResult.getSide();
             blockPos = blockHitResult.getBlockPos().offset(side);
             if (world.getBlockState(blockPos).isAir() && side != Direction.UP) {
-                world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
+                switch (side) {
+                    case NORTH, EAST, WEST, SOUTH:
+                        world.setBlockState(blockPos, WeirdEquipmentBlocks.WALL_ROPE.getDefaultState().with(WallRopeBlock.FACING, side.getOpposite()));
+                        break;
+                    case DOWN:
+                        world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
+                        break;
+                }
                 this.setNoGravity(true);
                 this.setVelocity(0, 0, 0, 0f, 0f);
                 isPlacing = true;
@@ -58,7 +65,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
 
     @Override
     public void tick() {
-        if (i == 3) {
+        if (i == 2) {
             i = 0;
             if (isPlacing && blockPos != null) {
                 if (world.getBlockState(blockPos = blockPos.offset(Direction.DOWN)).isAir() && j <= 18) {

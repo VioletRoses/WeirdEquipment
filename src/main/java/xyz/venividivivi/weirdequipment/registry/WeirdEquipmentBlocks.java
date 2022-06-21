@@ -9,15 +9,18 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import xyz.venividivivi.weirdequipment.block.RopeBlock;
+import xyz.venividivivi.weirdequipment.block.WallRopeBlock;
 
 import static net.minecraft.util.registry.Registry.*;
-import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
+import static xyz.venividivivi.weirdequipment.WeirdEquipment.MODID;
 
 public class WeirdEquipmentBlocks {
     public static final Block ROPE = new RopeBlock(FabricBlockSettings.of(Material.WOOL, MapColor.BROWN).strength(4.0f).dynamicBounds());
+    public static final Block WALL_ROPE = new WallRopeBlock(FabricBlockSettings.of(Material.WOOL, MapColor.BROWN).strength(4.0f).dynamicBounds());
 
     public static void init() {
         register(BLOCK, new Identifier(MODID, "rope"), ROPE);
+        register(BLOCK, new Identifier(MODID, "wall_rope"), WALL_ROPE);
         register(ITEM, new Identifier(MODID, "rope"), new BlockItem(ROPE, new FabricItemSettings().group(ItemGroup.MISC)));
     }
 }

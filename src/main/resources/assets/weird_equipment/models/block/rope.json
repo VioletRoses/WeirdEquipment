@@ -1,18 +1,19 @@
 {
 	"credit": "Made with Blockbench",
-	"texture_size": [4, 4],
+	"textures": {
+		"base": "weird_equipment:block/rope"
+	},
 	"elements": [
 		{
 			"from": [7, 0, 7],
 			"to": [9, 16, 9],
-			"color": 3,
 			"faces": {
-				"north": {"uv": [0, 0, 8, 16], "texture": "#missing"},
-				"east": {"uv": [0, 0, 8, 16], "texture": "#missing"},
-				"south": {"uv": [0, 0, 8, 16], "texture": "#missing"},
-				"west": {"uv": [0, 0, 8, 16], "texture": "#missing"},
-				"up": {"uv": [0, 0, 8, 8], "texture": "#missing"},
-				"down": {"uv": [0, 0, 8, 8], "texture": "#missing"}
+				"north": {"uv": [0, 0, 2, 16], "texture": "#base"},
+				"east": {"uv": [2, 0, 4, 16], "texture": "#base"},
+				"south": {"uv": [4, 0, 6, 16], "texture": "#base"},
+				"west": {"uv": [6, 0, 8, 16], "texture": "#base"},
+				"up": {"uv": [10, 2, 8, 0], "texture": "#base"},
+				"down": {"uv": [10, 2, 8, 4], "texture": "#base"}
 			}
 		}
 	]
