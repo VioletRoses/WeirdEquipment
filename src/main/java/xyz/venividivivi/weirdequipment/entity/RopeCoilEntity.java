@@ -29,7 +29,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
         this.count = count;
         if (count == 9) {
             parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
-        } else if (count == 27) {
+        } else if (count == 18) {
             parentItem = WeirdEquipmentItems.LARGE_ROPE_COIL;
         }
         this.world = world;

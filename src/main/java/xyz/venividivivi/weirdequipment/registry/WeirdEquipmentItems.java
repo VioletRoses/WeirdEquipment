@@ -8,8 +8,9 @@ import xyz.venividivivi.weirdequipment.item.*;
 import xyz.venividivivi.weirdequipment.material.CactusMaterial;
 import xyz.venividivivi.weirdequipment.material.PumpkinArmorMaterial;
 
-import static net.minecraft.util.registry.Registry.*;
-import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
+import static net.minecraft.util.registry.Registry.ITEM;
+import static net.minecraft.util.registry.Registry.register;
+import static xyz.venividivivi.weirdequipment.WeirdEquipment.MODID;
 
 public class WeirdEquipmentItems {
     //Weapons
@@ -27,7 +28,7 @@ public class WeirdEquipmentItems {
     //Consumables
     public static final Item SMALL_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 9);
 
-    public static final Item LARGE_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 27);
+    public static final Item LARGE_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 18);
 
     //Resources
     public static final Item ROPE = new WallHangingBlockItem(WeirdEquipmentBlocks.ROPE, WeirdEquipmentBlocks.WALL_ROPE, new FabricItemSettings().group(ItemGroup.MISC));
