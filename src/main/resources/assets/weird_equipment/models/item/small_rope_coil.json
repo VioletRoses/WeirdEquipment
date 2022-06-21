@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "weird_equipment:item/rope_coil"
+    "layer0": "weird_equipment:item/small_rope_coil"
   }
 }
