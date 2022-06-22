@@ -13,7 +13,7 @@ public class CactusSwordItem extends SwordItem {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        attacker.damage(DamageSource.CACTUS, 1);
+        attacker.damage(DamageSource.CACTUS, 2);
         return super.postHit(stack, target, attacker);
     }
 }

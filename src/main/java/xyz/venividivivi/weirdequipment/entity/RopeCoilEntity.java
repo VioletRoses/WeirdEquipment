@@ -31,6 +31,8 @@ public class RopeCoilEntity extends ThrownItemEntity {
             parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
         } else if (count == 18) {
             parentItem = WeirdEquipmentItems.LARGE_ROPE_COIL;
+        } else if (count == 36) {
+            parentItem = WeirdEquipmentItems.XL_ROPE_COIL;
         }
         this.world = world;
     }

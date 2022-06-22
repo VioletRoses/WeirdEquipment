@@ -27,8 +27,8 @@ public class WeirdEquipmentItems {
 
     //Consumables
     public static final Item SMALL_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 9);
-
     public static final Item LARGE_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 18);
+    public static final Item XL_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(16), 36);
 
     //Resources
     public static final Item ROPE = new WallHangingBlockItem(WeirdEquipmentBlocks.ROPE, WeirdEquipmentBlocks.WALL_ROPE, new FabricItemSettings().group(ItemGroup.MISC));
@@ -47,6 +47,7 @@ public class WeirdEquipmentItems {
         //Consumables
         register(ITEM, new Identifier(MODID, "small_rope_coil"), SMALL_ROPE_COIL);
         register(ITEM, new Identifier(MODID, "large_rope_coil"), LARGE_ROPE_COIL);
+        register(ITEM, new Identifier(MODID, "xl_rope_coil"), XL_ROPE_COIL);
         //Resources
         register(ITEM, new Identifier(MODID, "rope"), ROPE);
         register(ITEM, new Identifier(MODID, "torch_core"), TORCH_CORE);

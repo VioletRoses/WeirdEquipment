@@ -59,7 +59,7 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
                     blockState = Blocks.TORCH.getDefaultState();
                 }
         }
-        if (block.canPlaceAt(blockState, world, blockPos)) {
+        if (block.canPlaceAt(blockState, world, blockPos) && world.getBlockState(blockPos).isAir()) {
             world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.9f);
             world.setBlockState(blockPos, blockState);
             world.emitGameEvent(playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
