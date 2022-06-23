@@ -26,7 +26,7 @@ public class SelfSlingshotItem extends BowItem {
             float f = getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);
             float soundPitch = 0.05f;
             if (!((double) f < 0.1)) {
-                if (user.raycast(5, client.getTickDelta(), false).getType() == HitResult.Type.BLOCK) {
+                if (client.crosshairTarget.getType() == HitResult.Type.BLOCK) {
                     float yaw = playerEntity.getYaw(), pitch = playerEntity.getPitch(), roll = 0;
                     float g = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
                     float h = -MathHelper.sin((pitch + roll) * 0.017453292F);
