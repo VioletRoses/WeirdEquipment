@@ -1,14 +1,15 @@
 {
   "block.weird_equipment.rope": "Rope",
-  "item.weird_equipment.rope": "Rope",
-  "item.weird_equipment.small_rope_coil": "Small Rope Coil",
-  "item.weird_equipment.large_rope_coil": "Large Rope Coil",
-  "item.weird_equipment.xl_rope_coil": "XL Rope Coil",
   "item.weird_equipment.cactus_sword": "Cactus Sword",
   "item.weird_equipment.dirt_sword": "Dirt Sword",
   "item.weird_equipment.flint_and_shears": "Flint and Shears",
   "item.weird_equipment.jack_o_helmet": "Jack o'Helmet",
+  "item.weird_equipment.large_rope_coil": "Large Rope Coil",
   "item.weird_equipment.netherite_torch_pickaxe": "Netherite Torch Pickaxe",
+  "item.weird_equipment.rope": "Rope",
+  "item.weird_equipment.self_slingshot": "Self-Slingshot",
+  "item.weird_equipment.small_rope_coil": "Small Rope Coil",
   "item.weird_equipment.torch_bow": "Torch Bow",
-  "item.weird_equipment.torch_core": "Torch Core"
+  "item.weird_equipment.torch_core": "Torch Core",
+  "item.weird_equipment.xl_rope_coil": "XL Rope Coil"
 }

@@ -18,39 +18,37 @@ public class SelfSlingshotItem extends BowItem {
         super(settings);
     }
 
-    public ItemStack torchStack = null;
-    public Random random = Random.create();
-
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
-            int i = this.getMaxUseTime(stack) - remainingUseTicks;
-            float f = getPullProgress(i);
+            float f = getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);
             if (!((double) f < 0.1)) {
-                    //torchArrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
-                    stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-                    float yaw = playerEntity.getYaw(), pitch = playerEntity.getPitch(), roll = 0;
-                    float g = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-                    float h = -MathHelper.sin((pitch + roll) * 0.017453292F);
-                    float j = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-                    float divergence = 0;
 
-                    Vec3d vec3d = (new Vec3d(g, h, j)).normalize().add(this.random.nextTriangular(0.0, 0.0), this.random.nextTriangular(0.0, 0.0), this.random.nextTriangular(0.0, 0.0)).multiply(1.5f);
-                    playerEntity.setVelocity(vec3d);
+                float yaw = playerEntity.getYaw(), pitch = playerEntity.getPitch(), roll = 0;
+                float g = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+                float h = -MathHelper.sin((pitch + roll) * 0.017453292F);
+                float j = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+                playerEntity.setVelocity((new Vec3d(g, h, j)).normalize().multiply(-2.25f * f, -1.25f * f, -2.25f * f));
 
-                    world.playSound(playerEntity, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
+                world.playSound(playerEntity, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
             }
         }
     }
 
     @Override
+    public int getEnchantability() {
+        return 0;
+    }
+
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (user.isOnGround()) {
             user.setCurrentHand(hand);
-            return TypedActionResult.consume(user.getMainHandStack());
+            return TypedActionResult.consume(user.getStackInHand(hand));
         } else {
-            return TypedActionResult.fail(user.getMainHandStack());
+            return TypedActionResult.fail(user.getStackInHand(hand));
         }
     }
 }
