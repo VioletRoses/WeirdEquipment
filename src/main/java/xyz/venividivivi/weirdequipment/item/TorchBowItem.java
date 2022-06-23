@@ -14,22 +14,20 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import xyz.venividivivi.weirdequipment.entity.TorchArrowEntity;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 public class TorchBowItem extends BowItem {
     public TorchBowItem(Settings settings) {
         super(settings);
     }
 
-    public ItemStack torchStack = null;
+    public ItemStack ammoStack = null;
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
             boolean isCreativeOrInfinity = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
-            if(torchStack == null) {
-                return;
-            }
-            ItemStack itemStack = torchStack;
+            ItemStack itemStack = ammoStack;
             if (!itemStack.isEmpty() || isCreativeOrInfinity) {
                 if (itemStack.isEmpty()) {
                     itemStack = new ItemStack(Items.TORCH);
@@ -55,7 +53,9 @@ public class TorchBowItem extends BowItem {
                         if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) torchArrowEntity.fireTime = 6;
 
                         world.spawnEntity(torchArrowEntity);
-                        if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode) {
+                        if (!isCreativeAndHasAmmo && itemStack.getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
+                            user.getMainHandStack().damage(5, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.preferredHand));
+                        } else if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode) {
                             itemStack.decrement(1);
                             if (itemStack.isEmpty()) {
                                 playerEntity.getInventory().removeOne(itemStack);
@@ -74,11 +74,16 @@ public class TorchBowItem extends BowItem {
         for(int i = 0; i < inventory.size(); ++i) {
             ItemStack itemStack = inventory.getStack(i);
             if (inventory.getStack(i).getItem().equals(Items.TORCH) || user.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, user.getStackInHand(hand)) > 0) {
-                torchStack = itemStack;
+                ammoStack = itemStack;
                 user.setCurrentHand(hand);
                 return TypedActionResult.consume(user.getStackInHand(hand));
             }
+            if (user.getMainHandStack().getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
+                user.setCurrentHand(hand);
+                ammoStack = user.getMainHandStack();
+                return TypedActionResult.consume(user.getStackInHand(hand));
+            }
         }
-        return TypedActionResult.fail(user.getMainHandStack());
+        return TypedActionResult.fail(user.getStackInHand(hand));
     }
 }
