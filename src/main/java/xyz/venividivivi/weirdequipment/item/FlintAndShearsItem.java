@@ -23,7 +23,9 @@ public class FlintAndShearsItem extends ShearsItem {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
-        if (!CampfireBlock.canBeLit(blockState) && !CandleBlock.canBeLit(blockState) && !CandleCakeBlock.canBeLit(blockState)) {
+        if (blockState.getBlock().equals(Blocks.PUMPKIN)) {
+            return ActionResult.SUCCESS;
+        } else if (!CampfireBlock.canBeLit(blockState) && !CandleBlock.canBeLit(blockState) && !CandleCakeBlock.canBeLit(blockState)) {
             BlockPos blockPos2 = blockPos.offset(context.getSide());
             if (AbstractFireBlock.canPlaceAt(world, blockPos2, context.getPlayerFacing())) {
                 world.playSound(playerEntity, blockPos2, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);

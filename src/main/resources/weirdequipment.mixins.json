@@ -6,7 +6,8 @@
   "mixins": [
     "MatchToolLootConditionMixin",
     "SheepEntityMixin",
-    "ZombieEntityMixin"
+    "ZombieEntityMixin",
+    "PumpkinBlockMixin"
   ],
   "client": [
   ],
