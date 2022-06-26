@@ -21,6 +21,7 @@ public class WeirdEquipmentItems {
     public static final Item NETHERITE_TORCH_PICKAXE = new NetheriteTorchPickaxeItem(ToolMaterials.NETHERITE, 1, -2.8f, new FabricItemSettings().group(ItemGroup.TOOLS));
     public static final Item TORCH_BOW = new TorchBowItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(384));
     public static final Item SELF_SLINGSHOT = new SelfSlingshotItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(350));
+    public static final Item BLOCK_CANNON = new BlockCannonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(640));
     public static final Item FLINT_AND_SHEARS = new FlintAndShearsItem(new FabricItemSettings().maxDamage(300).group(ItemGroup.TOOLS));
 
     //Armor
@@ -43,6 +44,7 @@ public class WeirdEquipmentItems {
         register(ITEM, new Identifier(MODID, "netherite_torch_pickaxe"), NETHERITE_TORCH_PICKAXE);
         register(ITEM, new Identifier(MODID, "torch_bow"), TORCH_BOW);
         register(ITEM, new Identifier(MODID, "self_slingshot"), SELF_SLINGSHOT);
+        register(ITEM, new Identifier(MODID, "block_cannon"), BLOCK_CANNON);
         register(ITEM, new Identifier(MODID, "flint_and_shears"), FLINT_AND_SHEARS);
         //Armor
         register(ITEM, new Identifier(MODID, "jack_o_helmet"), JACK_O_HELMET);

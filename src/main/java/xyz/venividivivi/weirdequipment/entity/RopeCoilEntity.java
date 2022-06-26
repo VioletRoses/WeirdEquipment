@@ -4,6 +4,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,35 +16,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import xyz.venividivivi.weirdequipment.block.WallRopeBlock;
+import xyz.venividivivi.weirdequipment.item.RopeCoilItem;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentBlocks;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 public class RopeCoilEntity extends ThrownItemEntity {
-    public World world;
     public boolean isPlacing = false;
-    BlockPos blockPos = null;
-    int i = 0, j = 1, count;
-    Item parentItem;
+    private BlockPos blockPos = null;
+    private int i = 0, count = 0;
+    private static final TrackedData<ItemStack> STACK = DataTracker.registerData(RopeCoilEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
 
-    public RopeCoilEntity(World world, LivingEntity owner, int count) {
+    public RopeCoilEntity(World world, LivingEntity owner, RopeCoilItem item) {
         super(WeirdEquipmentEntityTypes.ROPE_COIL, owner, world);
-        this.count = count;
-        if (count == 9) {
-            parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
-        } else if (count == 18) {
-            parentItem = WeirdEquipmentItems.LARGE_ROPE_COIL;
-        } else if (count == 36) {
-            parentItem = WeirdEquipmentItems.XL_ROPE_COIL;
-        }
+        count = item.count;
+        getDataTracker().startTracking(STACK, new ItemStack(item, 1));
         this.world = world;
     }
 
     public RopeCoilEntity(EntityType<RopeCoilEntity> ropeCoilEntityEntityType, World world) {
         super(ropeCoilEntityEntityType, world);
-        this.count = 0;
-        parentItem = WeirdEquipmentItems.SMALL_ROPE_COIL;
-        this.world = world;
+        getDataTracker().startTracking(STACK, new ItemStack(WeirdEquipmentItems.SMALL_ROPE_COIL, 1));
     }
 
 
@@ -74,7 +69,7 @@ public class RopeCoilEntity extends ThrownItemEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(parentItem, 1)));
+        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), getDataTracker().get(STACK)));
         remove(RemovalReason.DISCARDED);
     }
 
@@ -98,11 +93,11 @@ public class RopeCoilEntity extends ThrownItemEntity {
     }
 
     public void dropItem() {
-        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(parentItem, 1)));
+        world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), getDataTracker().get(STACK)));
         remove(RemovalReason.DISCARDED);
     }
     @Override
     protected Item getDefaultItem() {
-        return parentItem;
+        return getDataTracker().get(STACK).getItem();
     }
 }
