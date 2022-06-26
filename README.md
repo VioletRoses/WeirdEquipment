@@ -2,6 +2,7 @@
 ## A small Minecraft mod that adds somewhat strange (but useful!) equipment.
 ### Depends on [LambDynamicLights](https://github.com/LambdAurora/LambDynamicLights)
 ### Currently the mod is very much in progress, but includes:
+* Block Cannon: A cannon that shoots blocks held in the offhand, effectively increasing placement distance.
 * Torch Bow: A bow that shoots torches, which are placed upon landing.
 * Ropes: Can be hung off walls or ceilings to make climbing up places easier.
 * Rope Coils: A thrown item that places ropes where it lands.
