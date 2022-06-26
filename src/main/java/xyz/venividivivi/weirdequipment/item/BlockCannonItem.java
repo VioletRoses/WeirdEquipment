@@ -39,7 +39,7 @@ public class BlockCannonItem extends Item {
                     }
                 }
                 world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.2F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + 0.5F);
-                return TypedActionResult.pass(user.getStackInHand(hand));
+                return TypedActionResult.consume(user.getStackInHand(hand));
             }
         }
         return TypedActionResult.fail(user.getStackInHand(hand));
