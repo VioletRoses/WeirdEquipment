@@ -2,6 +2,7 @@ package xyz.venividivivi.weirdequipment.material;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 
@@ -28,7 +29,7 @@ public class PumpkinArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return null;
+        return Ingredient.ofItems(Items.JACK_O_LANTERN);
     }
 
     @Override
