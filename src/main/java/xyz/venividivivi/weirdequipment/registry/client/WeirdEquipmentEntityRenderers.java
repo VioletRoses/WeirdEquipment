@@ -1,8 +1,9 @@
-package xyz.venividivivi.weirdequipment.registry;
+package xyz.venividivivi.weirdequipment.registry.client;
 
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import xyz.venividivivi.weirdequipment.entity.renderer.BlockCannonShotEntityRenderer;
 import xyz.venividivivi.weirdequipment.entity.renderer.TorchArrowEntityRenderer;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 
 import static net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.*;
 

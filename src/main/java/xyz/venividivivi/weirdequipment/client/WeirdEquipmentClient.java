@@ -1,8 +1,8 @@
 package xyz.venividivivi.weirdequipment.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityRenderers;
-import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentModelProviders;
+import xyz.venividivivi.weirdequipment.registry.client.WeirdEquipmentEntityRenderers;
+import xyz.venividivivi.weirdequipment.registry.client.WeirdEquipmentModelProviders;
 
 public class WeirdEquipmentClient implements ClientModInitializer {
     @Override

@@ -15,7 +15,7 @@ import static xyz.venividivivi.weirdequipment.WeirdEquipment.*;
 public class WeirdEquipmentEntityTypes {
     public static final EntityType<TorchArrowEntity> TORCH_ARROW = FabricEntityTypeBuilder.<TorchArrowEntity>create(SpawnGroup.MISC, TorchArrowEntity::new).dimensions(EntityDimensions.fixed(0.35f, 0.3f)).build();
     public static final EntityType<RopeCoilEntity> ROPE_COIL = FabricEntityTypeBuilder.<RopeCoilEntity>create(SpawnGroup.MISC, RopeCoilEntity::new).dimensions(EntityDimensions.fixed(0.3f, 0.3f)).build();
-    public static final EntityType<BlockCannonShotEntity> BLOCK_CANNON_SHOT = FabricEntityTypeBuilder.<BlockCannonShotEntity>create(SpawnGroup.MISC, BlockCannonShotEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build();
+    public static final EntityType<BlockCannonShotEntity> BLOCK_CANNON_SHOT = FabricEntityTypeBuilder.<BlockCannonShotEntity>create(SpawnGroup.MISC, BlockCannonShotEntity::new).dimensions(EntityDimensions.fixed(0.6f, 0.6f)).build();
 
     public static void init() {
         register(ENTITY_TYPE, new Identifier(MODID, "torch_arrow"), TORCH_ARROW);

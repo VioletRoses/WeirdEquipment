@@ -1,6 +1,7 @@
-package xyz.venividivivi.weirdequipment.registry;
+package xyz.venividivivi.weirdequipment.registry.client;
 
 import net.minecraft.util.Identifier;
+import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 import static net.minecraft.client.item.ModelPredicateProviderRegistry.*;
 

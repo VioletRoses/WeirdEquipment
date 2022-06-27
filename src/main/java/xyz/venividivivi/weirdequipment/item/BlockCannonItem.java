@@ -1,6 +1,5 @@
 package xyz.venividivivi.weirdequipment.item;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
@@ -12,7 +11,6 @@ import net.minecraft.world.World;
 import xyz.venividivivi.weirdequipment.entity.BlockCannonShotEntity;
 
 public class BlockCannonItem extends Item {
-    MinecraftClient client = MinecraftClient.getInstance();
 
     public BlockCannonItem(Settings settings) {
         super(settings);
@@ -20,7 +18,7 @@ public class BlockCannonItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(client.crosshairTarget.getType() != HitResult.Type.BLOCK) {
+        if(user.raycast(5.0, 0, false).getType() != HitResult.Type.BLOCK) {
             Item offHandItem = user.getOffHandStack().getItem();
             if (offHandItem instanceof BlockItem) {
                 user.setCurrentHand(hand);
