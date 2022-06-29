@@ -1,6 +1,7 @@
 package xyz.venividivivi.weirdequipment.entity;
 
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -45,8 +46,8 @@ public class BlockCannonShotEntity extends ThrownItemEntity {
             BlockState blockState = world.getBlockState(blockHitResult.getBlockPos());
             BlockState placementState = block.getPlacementState(new FrozenPlayerItemPlacementContext(world, (PlayerEntity) getOwner(), Hand.OFF_HAND, block.asItem().getDefaultStack(), blockHitResult, facing));
             if (world.getBlockState(blockPos).isAir() && block.canPlaceAt(placementState, world, blockPos)) {
-                if (!blockState.isOf(block)) world.setBlockState(blockPos, placementState);
-                else world.setBlockState(blockPos.offset(side.getOpposite()), placementState);
+                if (blockState.getBlock() instanceof SlabBlock && blockState.isOf(block) && !blockState.isFullCube(world, blockHitResult.getBlockPos())) world.setBlockState(blockPos.offset(side.getOpposite()), placementState);
+                else world.setBlockState(blockPos, placementState);
                 remove(RemovalReason.DISCARDED);
             } else {
                 world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(block.asItem(), 1)));

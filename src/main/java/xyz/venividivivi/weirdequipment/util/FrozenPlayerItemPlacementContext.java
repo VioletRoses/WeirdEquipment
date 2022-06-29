@@ -17,17 +17,8 @@ public class FrozenPlayerItemPlacementContext extends ItemPlacementContext {
     public FrozenPlayerItemPlacementContext(World world, @Nullable PlayerEntity playerEntity, Hand hand, ItemStack itemStack, BlockHitResult blockHitResult, Direction[] facing) {
         super(world, playerEntity, hand, itemStack, blockHitResult);
         this.facing = facing;
-        boolean isHorizontalSet = false, isVerticalSet = false;
-        for (Direction direction : Direction.getEntityFacingOrder(playerEntity)) {
-            if (isHorizontalSet && isVerticalSet) break;
-            else if (!isVerticalSet && direction.getAxis().isVertical()) {
-                verticalFacing = direction;
-                isVerticalSet = true;
-            } else if (!isHorizontalSet && direction.getAxis().isHorizontal()) {
-                horizontalFacing = direction;
-                isHorizontalSet = true;
-            }
-        }
+        horizontalFacing = playerEntity.getHorizontalFacing();
+        verticalFacing = Direction.getLookDirectionForAxis(this.getPlayer(), Direction.Axis.Y);
     }
 
     @Override
