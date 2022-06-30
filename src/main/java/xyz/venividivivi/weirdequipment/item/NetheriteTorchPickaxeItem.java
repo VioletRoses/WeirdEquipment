@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -32,7 +33,7 @@ public class NetheriteTorchPickaxeItem extends PickaxeItem {
         } else {
             blockState = Blocks.TORCH.getDefaultState();
         }
-        if (blockState.canPlaceAt(world, blockPos)) {
+        if (blockState.canPlaceAt(world, blockPos) && world.getBlockState(blockPos).isAir()) {
             PlayerEntity playerEntity = context.getPlayer();
             world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.9f);
             world.setBlockState(blockPos, blockState);

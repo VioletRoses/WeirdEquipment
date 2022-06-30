@@ -23,12 +23,11 @@ public class RopeCoilItem extends Item {
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
             RopeCoilEntity ropeCoilEntity = new RopeCoilEntity(world, user, this);
-            ropeCoilEntity.setItem(itemStack);
             ropeCoilEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             world.spawnEntity(ropeCoilEntity);
         }
         if (!user.getAbilities().creativeMode) itemStack.decrement(1);
-        return TypedActionResult.success(itemStack, world.isClient());
+        return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
     }
 
 }

@@ -41,7 +41,6 @@ public class TorchBowItem extends BowItem {
                         TorchArrowEntity torchArrowEntity = new TorchArrowEntity(world, playerEntity);
                         torchArrowEntity.setDamage(1.0f);
                         torchArrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
-                        stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
                         if(f == 1.0f) torchArrowEntity.setCritical(true);
 
                         int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
@@ -53,14 +52,15 @@ public class TorchBowItem extends BowItem {
                         if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) torchArrowEntity.fireTime = 6;
 
                         world.spawnEntity(torchArrowEntity);
-                        if (!isCreativeAndHasAmmo && itemStack.getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
-                            user.getMainHandStack().damage(5, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.preferredHand));
-                        } else if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode) {
+                        if (!isCreativeAndHasAmmo && !playerEntity.getAbilities().creativeMode && itemStack.isOf(Items.TORCH)) {
                             itemStack.decrement(1);
                             if (itemStack.isEmpty()) {
                                 playerEntity.getInventory().removeOne(itemStack);
                             }
+                        } else if (!isCreativeAndHasAmmo && itemStack.getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
+                            user.getMainHandStack().damage(5, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.preferredHand));
                         }
+                            stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
                     }
                     world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                 }
@@ -78,11 +78,11 @@ public class TorchBowItem extends BowItem {
                 user.setCurrentHand(hand);
                 return TypedActionResult.consume(user.getStackInHand(hand));
             }
-            if (user.getMainHandStack().getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
-                user.setCurrentHand(hand);
-                ammoStack = user.getMainHandStack();
-                return TypedActionResult.consume(user.getStackInHand(hand));
-            }
+        }
+        if (user.getMainHandStack().getItem().equals(WeirdEquipmentItems.NETHERITE_TORCH_PICKAXE)) {
+            user.setCurrentHand(hand);
+            ammoStack = user.getMainHandStack();
+            return TypedActionResult.consume(user.getStackInHand(hand));
         }
         return TypedActionResult.fail(user.getStackInHand(hand));
     }

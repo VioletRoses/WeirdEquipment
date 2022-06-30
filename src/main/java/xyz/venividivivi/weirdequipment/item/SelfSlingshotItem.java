@@ -25,9 +25,9 @@ public class SelfSlingshotItem extends BowItem {
             float soundPitch = 0.05f;
             if (!((double) f < 0.1)) {
                 if (user.raycast(5.0, 0, false).getType() == HitResult.Type.BLOCK) {
-                    float yaw = playerEntity.getYaw(), pitch = playerEntity.getPitch(), roll = 0;
+                    float yaw = playerEntity.getYaw(), pitch = playerEntity.getPitch();
                     float g = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-                    float h = -MathHelper.sin((pitch + roll) * 0.017453292F);
+                    float h = -MathHelper.sin((pitch) * 0.017453292F);
                     float j = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
                     playerEntity.setVelocity((new Vec3d(g, h, j)).normalize().multiply(-2.25f * f, -1.25f * f, -2.25f * f));
 
