@@ -9,6 +9,18 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+/*
+This class requires some explanation:
+For the block cannon, the method getPlacementState() is used to determine the rotation and other non-standard
+properties of the block being placed. This method requires an ItemPlacementContext, which in turn needs the player's
+PlayerEntity. The ItemPlacementContext provides info including where player is looking, to determine the block rotation.
+This info should be determined when the cannon fires, but due to the ItemPlacementContext also requiring the position
+of where the block is being placed, has to be calculated when the block lands. This means that if the player looks
+away after firing the cannon, the block will be placed with the incorrect rotation.
+That's where this class comes into play. It overrides the methods that determine where the PlayerEntity is looking,
+and replaces the return values with values that were calculated when the cannon was fired. It's a bit hacky, but is
+(to my knowledge) the only way of going about this.
+ */
 public class FrozenPlayerItemPlacementContext extends ItemPlacementContext {
 
     public Direction horizontalFacing, verticalFacing;

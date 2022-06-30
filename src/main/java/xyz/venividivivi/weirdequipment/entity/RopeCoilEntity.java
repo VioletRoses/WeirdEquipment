@@ -22,10 +22,13 @@ import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentItems;
 
 public class RopeCoilEntity extends ThrownItemEntity {
+
+    // The type of rope thrown is stored as TrackedData, which allows the client to see it and determine which sprite to use
+    private static final TrackedData<ItemStack> STACK = DataTracker.registerData(RopeCoilEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     public boolean isPlacing = false;
     private BlockPos blockPos = null;
-    private int i = 0, count = 0;
-    private static final TrackedData<ItemStack> STACK = DataTracker.registerData(RopeCoilEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
+    private int i = 0;
+    private int count = 0;
 
     public RopeCoilEntity(World world, LivingEntity owner, RopeCoilItem item) {
         super(WeirdEquipmentEntityTypes.ROPE_COIL, owner, world);
@@ -42,26 +45,29 @@ public class RopeCoilEntity extends ThrownItemEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
+        // Prevents method from being triggered twice
         if (!isPlacing) {
             Direction side = blockHitResult.getSide();
             blockPos = blockHitResult.getBlockPos().offset(side);
             if (world.getBlockState(blockPos).isAir() && side != Direction.UP) {
-                switch (side) {
-                    case NORTH, EAST, WEST, SOUTH:
-                        BlockState blockState = WeirdEquipmentBlocks.WALL_ROPE.getDefaultState().with(WallRopeBlock.FACING, side.getOpposite());
-                        if (WeirdEquipmentBlocks.WALL_ROPE.canPlaceAt(blockState, world, blockPos)) {
-                            world.setBlockState(blockPos, blockState);
-                        } else dropItem();
-                        break;
-                    case DOWN:
-                        if (WeirdEquipmentBlocks.ROPE.canPlaceAt(WeirdEquipmentBlocks.ROPE.getDefaultState(), world, blockPos)) {
-                            world.setBlockState(blockPos, WeirdEquipmentBlocks.ROPE.getDefaultState());
-                        } else dropItem();
-                        break;
-                }
+                BlockState blockState;
+                if (side.getAxis().isHorizontal())
+                    blockState = WeirdEquipmentBlocks.WALL_ROPE.getDefaultState().with(WallRopeBlock.FACING, side.getOpposite());
+                else
+                    blockState = WeirdEquipmentBlocks.ROPE.getDefaultState();
+
+                if (blockState.canPlaceAt(world, blockPos))
+                    world.setBlockState(blockPos, blockState);
+                else
+                    dropItem();
+
+                // Freezes the projectile in place
                 this.setNoGravity(true);
                 this.setVelocity(0, 0, 0, 0f, 0f);
+
                 count--;
+
+                // Placement of ropes is passed to tick(), which allows them to be placed sequentially instead of all at once
                 isPlacing = true;
             } else dropItem();
         }
@@ -96,6 +102,8 @@ public class RopeCoilEntity extends ThrownItemEntity {
         world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), getDataTracker().get(STACK)));
         remove(RemovalReason.DISCARDED);
     }
+
+    // Among other things, this method determines which sprite the projectile uses
     @Override
     protected Item getDefaultItem() {
         return getDataTracker().get(STACK).getItem();
