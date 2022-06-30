@@ -46,28 +46,22 @@ public class TorchArrowEntity extends PersistentProjectileEntity {
         Direction side = blockHitResult.getSide();
         BlockPos blockPos = blockHitResult.getBlockPos().offset(side);
         BlockState blockState;
-        Block block;
-        switch(side) {
-            case NORTH, EAST, SOUTH, WEST:
-                block = Blocks.WALL_TORCH;
-                blockState = block.getDefaultState().with(WallTorchBlock.FACING, side);
-                break;
-            default:
-                block = Blocks.TORCH;
-                blockState = block.getDefaultState();
-                if (!Blocks.TORCH.canPlaceAt(blockState, world, blockPos)) {
-                    blockState = Blocks.TORCH.getDefaultState();
-                }
+
+        if (side.getAxis().isHorizontal()) {
+            blockState = Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.FACING, side);
+        } else {
+            blockState = Blocks.TORCH.getDefaultState();
         }
-        if (block.canPlaceAt(blockState, world, blockPos) && world.getBlockState(blockPos).isAir()) {
-            world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.9f);
+
+        if (blockState.canPlaceAt(world, blockPos) && world.getBlockState(blockPos).isAir()) {
+            world.playSound(null, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.25F, 0.9f);
             world.setBlockState(blockPos, blockState);
             world.emitGameEvent(playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
         } else {
+            world.playSound(null, blockPos, SoundEvents.ENTITY_ARROW_HIT, SoundCategory.BLOCKS, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
             world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(Items.TORCH, 1)));
         }
         remove(RemovalReason.DISCARDED);
-        super.onBlockHit(blockHitResult);
     }
 
     @Override
