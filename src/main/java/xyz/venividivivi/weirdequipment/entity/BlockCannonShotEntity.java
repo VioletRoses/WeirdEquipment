@@ -46,7 +46,7 @@ public class BlockCannonShotEntity extends ThrownItemEntity {
             BlockState blockState = world.getBlockState(blockHitResult.getBlockPos());
             BlockState placementState = block.getPlacementState(new FrozenPlayerItemPlacementContext(world, (PlayerEntity) getOwner(), Hand.OFF_HAND, block.asItem().getDefaultStack(), blockHitResult, facing));
             if (world.getBlockState(blockPos).isAir() && block.canPlaceAt(placementState, world, blockPos)) {
-                if (blockState.getBlock() instanceof SlabBlock && blockState.isOf(block) && !blockState.isFullCube(world, blockHitResult.getBlockPos())) {
+                if (blockState.getBlock() instanceof SlabBlock && blockState.isOf(block) && !blockState.isFullCube(world, blockPos.offset(side.getOpposite()))) {
                     world.setBlockState(blockPos.offset(side.getOpposite()), placementState.with(SlabBlock.TYPE, SlabType.DOUBLE));
                 } else world.setBlockState(blockPos, placementState);
             } else world.spawnEntity(new ItemEntity(world, getX(), getY(), getZ(), new ItemStack(block.asItem(), 1)));
