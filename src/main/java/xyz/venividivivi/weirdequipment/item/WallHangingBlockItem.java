@@ -23,11 +23,10 @@ public class WallHangingBlockItem extends BlockItem {
     protected BlockState getPlacementState(ItemPlacementContext context) {
         BlockState blockState = this.wallBlock.getPlacementState(context);
         Direction side = context.getSide();
-        switch (side) {
-            case DOWN:
-                return this.getBlock().getDefaultState();
-            case NORTH, EAST, WEST, SOUTH:
-                return blockState;
+        if (side.equals(Direction.DOWN)) {
+            return this.getBlock().getDefaultState();
+        } else if (side.getAxis().isHorizontal()) {
+            return blockState;
         }
         return null;
     }

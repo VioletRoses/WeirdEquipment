@@ -1,6 +1,5 @@
 package xyz.venividivivi.weirdequipment.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
@@ -25,7 +24,7 @@ import xyz.venividivivi.weirdequipment.registry.WeirdEquipmentEntityTypes;
 
 public class TorchArrowEntity extends PersistentProjectileEntity {
 
-    public World world;
+    public final World world;
     public PlayerEntity playerEntity;
     public int fireTime = 3;
 

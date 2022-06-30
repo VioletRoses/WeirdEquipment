@@ -1,6 +1,5 @@
 package xyz.venividivivi.weirdequipment.item;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;

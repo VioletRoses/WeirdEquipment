@@ -1,6 +1,5 @@
 package xyz.venividivivi.weirdequipment.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
@@ -39,9 +38,7 @@ public class NetheriteTorchPickaxeItem extends PickaxeItem {
             world.setBlockState(blockPos, blockState);
             world.emitGameEvent(playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
             if (playerEntity instanceof ServerPlayerEntity) {
-                context.getStack().damage(5, playerEntity, (p) -> {
-                    p.sendToolBreakStatus(context.getHand());
-                });
+                context.getStack().damage(5, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
             }
             return ActionResult.SUCCESS;
         }

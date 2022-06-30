@@ -35,9 +35,7 @@ public class FlintAndShearsItem extends ShearsItem {
                 ItemStack itemStack = context.getStack();
                 if (playerEntity instanceof ServerPlayerEntity) {
                     Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos2, itemStack);
-                    itemStack.damage(1, playerEntity, (p) -> {
-                        p.sendToolBreakStatus(context.getHand());
-                    });
+                    itemStack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
                 }
 
                 return ActionResult.success(world.isClient());
@@ -46,12 +44,10 @@ public class FlintAndShearsItem extends ShearsItem {
             }
         } else {
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-            world.setBlockState(blockPos, (BlockState)blockState.with(Properties.LIT, true), 11);
+            world.setBlockState(blockPos, blockState.with(Properties.LIT, true), 11);
             world.emitGameEvent(playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
             if (playerEntity != null) {
-                context.getStack().damage(1, playerEntity, (p) -> {
-                    p.sendToolBreakStatus(context.getHand());
-                });
+                context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
             }
 
             return ActionResult.success(world.isClient());

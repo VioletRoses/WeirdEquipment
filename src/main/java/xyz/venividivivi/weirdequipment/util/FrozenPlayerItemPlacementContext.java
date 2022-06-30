@@ -7,7 +7,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 /*
 This class requires some explanation:
@@ -23,14 +22,14 @@ and replaces the return values with values that were calculated when the cannon 
  */
 public class FrozenPlayerItemPlacementContext extends ItemPlacementContext {
 
-    public Direction horizontalFacing, verticalFacing;
-    public Direction[] facing;
+    public final Direction horizontalFacing, verticalFacing;
+    public final Direction[] facing;
 
-    public FrozenPlayerItemPlacementContext(World world, @Nullable PlayerEntity playerEntity, Hand hand, ItemStack itemStack, BlockHitResult blockHitResult, Direction[] facing) {
+    public FrozenPlayerItemPlacementContext(World world, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, BlockHitResult blockHitResult, Direction[] facing) {
         super(world, playerEntity, hand, itemStack, blockHitResult);
         this.facing = facing;
         horizontalFacing = playerEntity.getHorizontalFacing();
-        verticalFacing = Direction.getLookDirectionForAxis(this.getPlayer(), Direction.Axis.Y);
+        verticalFacing = Direction.getLookDirectionForAxis(playerEntity, Direction.Axis.Y);
     }
 
     @Override
@@ -41,13 +40,12 @@ public class FrozenPlayerItemPlacementContext extends ItemPlacementContext {
     @Override
     public Direction[] getPlacementDirections() {
         Direction[] directions = facing;
-        if (this.canReplaceExisting) {
-            return directions;
-        } else {
+        if (!this.canReplaceExisting) {
             Direction direction = this.getSide();
 
-            int i;
-            for(i = 0; i < directions.length && directions[i] != direction.getOpposite(); ++i) {
+            int i = 0;
+            while (i < directions.length && directions[i] != direction.getOpposite()) {
+                ++i;
             }
 
             if (i > 0) {
@@ -55,8 +53,8 @@ public class FrozenPlayerItemPlacementContext extends ItemPlacementContext {
                 directions[0] = direction.getOpposite();
             }
 
-            return directions;
         }
+        return directions;
     }
 
     @Override
