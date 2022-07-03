@@ -2,6 +2,7 @@ package xyz.venividivivi.weirdequipment.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import xyz.venividivivi.weirdequipment.item.*;
@@ -23,6 +24,7 @@ public class WeirdEquipmentItems {
     public static final Item SELF_SLINGSHOT = new SelfSlingshotItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(350));
     public static final Item BLOCK_CANNON = new BlockCannonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(640));
     public static final Item FLINT_AND_SHEARS = new FlintAndShearsItem(new FabricItemSettings().maxDamage(300).group(ItemGroup.TOOLS));
+    public static final Item BOTTOMLESS_WATER_BUCKET = new BucketItem(Fluids.WATER, new FabricItemSettings().group(ItemGroup.TOOLS));
 
     //Armor
     public static final Item JACK_O_HELMET = new ArmorItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
@@ -46,6 +48,7 @@ public class WeirdEquipmentItems {
         register(ITEM, new Identifier(MODID, "self_slingshot"), SELF_SLINGSHOT);
         register(ITEM, new Identifier(MODID, "block_cannon"), BLOCK_CANNON);
         register(ITEM, new Identifier(MODID, "flint_and_shears"), FLINT_AND_SHEARS);
+        register(ITEM, new Identifier(MODID, "bottomless_water_bucket"), BOTTOMLESS_WATER_BUCKET);
         //Armor
         register(ITEM, new Identifier(MODID, "jack_o_helmet"), JACK_O_HELMET);
         //Consumables
