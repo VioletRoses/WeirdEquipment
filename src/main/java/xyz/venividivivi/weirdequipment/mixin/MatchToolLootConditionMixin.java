@@ -26,14 +26,12 @@ public class MatchToolLootConditionMixin {
     public void test(LootContext lootContext, CallbackInfoReturnable<Boolean> info) {
         ItemStack itemStack = lootContext.get(LootContextParameters.TOOL);
         JsonObject jObjectPredicate = JsonHelper.asObject(predicate.toJson(), "predicate");
-        if (itemStack != null && !itemStack.isEmpty() && itemStack.getItem() instanceof ShearsItem) {
-            try {
-                for (JsonElement i : JsonHelper.getArray(jObjectPredicate, "items")) {
-                    if (i.getAsString().equalsIgnoreCase("minecraft:shears")) {
-                        info.setReturnValue(true);
-                    }
+        if (itemStack != null && itemStack.getItem() instanceof ShearsItem && JsonHelper.hasElement(jObjectPredicate, "items")) {
+            for (JsonElement i : JsonHelper.getArray(jObjectPredicate, "items")) {
+                if (i.getAsString().equalsIgnoreCase("minecraft:shears")) {
+                    info.setReturnValue(true);
                 }
-            } catch (JsonSyntaxException ignored) {}
+            }
         }
     }
 }
