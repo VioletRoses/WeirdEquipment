@@ -1,5 +1,10 @@
 {
   "block.weird_equipment.rope": "Rope",
+  "config.weird_equipment.category.general": "General",
+  "config.weird_equipment.entry.netherite_torch_pickaxe_durability_loss": "Torch Pickaxe durability loss",
+  "config.weird_equipment.entry.self_slingshot_velocity": "Self-Slingshot velocity",
+  "config.weird_equipment.entry.torch_bow_can_damage_mobs": "Torch Bow damages mobs",
+  "config.weird_equipment.title": "Weird Equipment Config",
   "item.weird_equipment.block_cannon": "Block Cannon",
   "item.weird_equipment.bottomless_water_bucket": "Bottomless Water Bucket",
   "item.weird_equipment.cactus_sword": "Cactus Sword",

@@ -8,7 +8,8 @@
     "VioletRoses"
   ],
   "contact": {
-    "website": "venividivivi.xyz"
+    "homepage": "https://github.com/VioletRoses/WeirdEquipment",
+    "issues": "https://github.com/VioletRoses/WeirdEquipment/issues"
   },
   "license": "MIT",
   "icon": "assets/weird_equipment/icon.png",
@@ -22,6 +23,9 @@
     ],
     "dynamiclights": [
       "xyz.venividivivi.weirdequipment.addon.DynamicLightsAddon"
+    ],
+    "modmenu": [
+      "xyz.venividivivi.weirdequipment.addon.ModMenuAddon"
     ]
   },
   "mixins": [
