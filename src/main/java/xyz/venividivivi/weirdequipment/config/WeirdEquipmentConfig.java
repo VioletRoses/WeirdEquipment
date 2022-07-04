@@ -49,7 +49,7 @@ public class WeirdEquipmentConfig {
             NETHERITE_TORCH_PICKAXE_DURABILITY_LOSS = JsonHelper.getInt(json, "netherite_torch_pickaxe_durability_loss");
             SELF_SLINGSHOT_VELOCITY = JsonHelper.getFloat(json, "self_slingshot_velocity");
         } catch (JsonSyntaxException e) {
-            LOGGER.error("Failed to parse member in property file");
+            LOGGER.error("Failed to parse member in property file, setting defaults for unparsed values.");
         }
     }
 

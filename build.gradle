@@ -15,6 +15,10 @@ repositories {
         name 'Gegy'
         url 'https://maven.gegy.dev/releases'
     }
+    maven {
+        name 'Shedaniel'
+        url "https://maven.shedaniel.me/"
+    }
 }
 
 dependencies {
@@ -25,7 +29,10 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     //LambDynamicLights
-    modImplementation "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}+${project.minecraft_version}"
+    modApi "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}+${project.minecraft_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 }
 
 processResources {
