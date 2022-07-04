@@ -2,6 +2,7 @@ package xyz.venividivivi.weirdequipment.config;
 
 import com.google.gson.*;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,11 @@ import java.io.IOException;
 
 public class WeirdEquipmentConfig {
     protected static final Logger LOGGER = LoggerFactory.getLogger("Weird Equipment Config");
+    protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve("weird_equipment.json").toFile();
+    public static boolean TORCH_BOW_CAN_DAMAGE_MOBS = true;
+    public static int NETHERITE_TORCH_PICKAXE_DURABILITY_LOSS = 5;
+    public static float SELF_SLINGSHOT_VELOCITY = 1;
     public static void init() {
         load();
     }
@@ -30,7 +35,7 @@ public class WeirdEquipmentConfig {
 
     public static void save() {
         try (FileWriter writer = new FileWriter(FILE)) {
-            writer.write(toJson().toString());
+            writer.write(GSON.toJson(toJson()));
         } catch (IOException e) {
             LOGGER.error("Failed to save config to: '" + FILE.getPath() + "', " + e);
         }
@@ -38,6 +43,9 @@ public class WeirdEquipmentConfig {
 
     public static void fromJson(JsonObject json) {
         try {
+            TORCH_BOW_CAN_DAMAGE_MOBS = JsonHelper.getBoolean(json, "torch_bow_can_damage_mobs");
+            NETHERITE_TORCH_PICKAXE_DURABILITY_LOSS = JsonHelper.getInt(json, "netherite_torch_pickaxe_durability_loss");
+            SELF_SLINGSHOT_VELOCITY = JsonHelper.getFloat(json, "self_slingshot_velocity");
         } catch (JsonSyntaxException e) {
             LOGGER.error("Failed to parse member in property file");
         }
@@ -45,6 +53,9 @@ public class WeirdEquipmentConfig {
 
     public static JsonObject toJson() {
         JsonObject json = new JsonObject();
+        json.addProperty("torch_bow_can_damage_mobs", TORCH_BOW_CAN_DAMAGE_MOBS);
+        json.addProperty("netherite_torch_pickaxe_durability_loss", NETHERITE_TORCH_PICKAXE_DURABILITY_LOSS);
+        json.addProperty("self_slingshot_velocity", SELF_SLINGSHOT_VELOCITY);
         return json;
     }
 
