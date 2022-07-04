@@ -29,6 +29,8 @@ public class WeirdEquipmentConfig {
             } catch (Exception e) {
                 LOGGER.error("Could not load config from: '" + FILE.getPath() + "', " + e);
             }
+        } else {
+            LOGGER.info("Could not find config, creating one with defaults");
         }
         save();
     }
