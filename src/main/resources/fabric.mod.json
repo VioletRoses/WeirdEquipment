@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "weirdequipment",
+  "id": "weird_equipment",
   "version": "${version}",
   "name": "Weird Equipment",
   "description": "A collection of strange tools, weapons, and armor, meant to fit in with vanilla.",
@@ -29,7 +29,7 @@
     ]
   },
   "mixins": [
-    "weirdequipment.mixins.json"
+    "weird_equipment.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.8",
