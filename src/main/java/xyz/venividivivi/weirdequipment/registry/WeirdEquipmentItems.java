@@ -6,8 +6,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import xyz.venividivivi.weirdequipment.item.*;
-import xyz.venividivivi.weirdequipment.material.CactusMaterial;
-import xyz.venividivivi.weirdequipment.material.PumpkinArmorMaterial;
+import xyz.venividivivi.weirdequipment.item.material.CactusMaterial;
+import xyz.venividivivi.weirdequipment.item.material.PumpkinArmorMaterial;
 
 import static net.minecraft.util.registry.Registry.ITEM;
 import static net.minecraft.util.registry.Registry.register;

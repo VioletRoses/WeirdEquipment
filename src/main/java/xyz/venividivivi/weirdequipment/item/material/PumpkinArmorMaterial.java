@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment.material;
+package xyz.venividivivi.weirdequipment.item.material;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;

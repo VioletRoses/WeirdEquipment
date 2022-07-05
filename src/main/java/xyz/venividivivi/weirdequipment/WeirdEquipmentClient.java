@@ -1,4 +1,4 @@
-package xyz.venividivivi.weirdequipment.client;
+package xyz.venividivivi.weirdequipment;
 
 import net.fabricmc.api.ClientModInitializer;
 import xyz.venividivivi.weirdequipment.registry.client.WeirdEquipmentEntityRenderers;
