@@ -1,6 +1,7 @@
 package xyz.venividivivi.weirdequipment.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -27,7 +28,7 @@ public class WeirdEquipmentItems {
     public static final Item BOTTOMLESS_WATER_BUCKET = new BucketItem(Fluids.WATER, new FabricItemSettings().group(ItemGroup.TOOLS));
 
     //Armor
-    public static final Item JACK_O_HELMET = new ArmorItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
+    public static final Item JACK_O_HELMET = new JackOHelmetItem(new PumpkinArmorMaterial(), EquipmentSlot.HEAD, new FabricItemSettings().group(ItemGroup.COMBAT));
 
     //Consumables
     public static final Item SMALL_ROPE_COIL = new RopeCoilItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(32), 9);
