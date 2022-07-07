@@ -36,5 +36,8 @@
     "fabric": "*",
     "minecraft": "1.19",
     "lambdynlights": "*"
+  },
+  "recommends": {
+    "cloth-config": ">=7.0.72"
   }
 }
