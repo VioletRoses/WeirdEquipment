@@ -1,6 +1,6 @@
 # Weird Equipment [Fabric]
 ## A small Minecraft mod that adds somewhat strange (but useful!) equipment.
-### Depends on [LambDynamicLights](https://github.com/LambdAurora/LambDynamicLights) and [Cloth Config](https://github.com/shedaniel/cloth-config)
+### [LambDynamicLights](https://github.com/LambdAurora/LambDynamicLights) and [Cloth Config](https://github.com/shedaniel/cloth-config) are recommended for full functionality.
 ### Currently the mod is very much in progress, but includes:
 * Block Cannon: A cannon that shoots blocks held in the offhand, effectively increasing placement distance.
 * Torch Bow: A bow that shoots torches, which are placed upon landing.
