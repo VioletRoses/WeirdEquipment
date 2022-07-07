@@ -35,7 +35,6 @@
     "fabricloader": ">=0.14.8",
     "fabric": "*",
     "minecraft": "1.19",
-    "lambdynlights": "*",
-    "cloth-config": ">=7.0.72"
+    "lambdynlights": "*"
   }
 }

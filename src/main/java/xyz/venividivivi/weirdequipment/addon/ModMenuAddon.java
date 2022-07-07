@@ -2,12 +2,14 @@ package xyz.venividivivi.weirdequipment.addon;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import net.fabricmc.loader.api.FabricLoader;
 import xyz.venividivivi.weirdequipment.config.WeirdEquipmentConfigScreen;
 
 public class ModMenuAddon implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return WeirdEquipmentConfigScreen::init;
+        if (FabricLoader.getInstance().isModLoaded("cloth-config")) return WeirdEquipmentConfigScreen::init;
+        else return parent -> null;
     }
 
 }
