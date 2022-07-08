@@ -25,6 +25,7 @@ public class WeirdEquipmentItems {
     public static final Item SELF_SLINGSHOT = new SelfSlingshotItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(350));
     public static final Item BLOCK_CANNON = new BlockCannonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(640));
     public static final Item FLINT_AND_SHEARS = new FlintAndShearsItem(new FabricItemSettings().maxDamage(300).group(ItemGroup.TOOLS));
+    public static final Item DIAMOND_SHEARS = new ShearsItem(new FabricItemSettings().maxDamage(1000).group(ItemGroup.TOOLS));
     public static final Item BOTTOMLESS_WATER_BUCKET = new BucketItem(Fluids.WATER, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1));
     public static final Item LARGE_LAVA_BUCKET = new BucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxDamage(9));
 
@@ -50,6 +51,7 @@ public class WeirdEquipmentItems {
         register(ITEM, new Identifier(MODID, "self_slingshot"), SELF_SLINGSHOT);
         register(ITEM, new Identifier(MODID, "block_cannon"), BLOCK_CANNON);
         register(ITEM, new Identifier(MODID, "flint_and_shears"), FLINT_AND_SHEARS);
+        register(ITEM, new Identifier(MODID, "diamond_shears"), DIAMOND_SHEARS);
         register(ITEM, new Identifier(MODID, "bottomless_water_bucket"), BOTTOMLESS_WATER_BUCKET);
         register(ITEM, new Identifier(MODID, "large_lava_bucket"), LARGE_LAVA_BUCKET);
         //Armor
