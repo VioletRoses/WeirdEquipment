@@ -1,3 +1,4 @@
+# *This version of the project has been abandoned in favor of [Weird Equipment Rearchitected](https://github.com/VioletRoses/WeirdEquipmentRearchitected), a rewrite that makes the mod available on both Fabric and Forge.*
 # Weird Equipment [Fabric]
 ## A small Minecraft mod that adds somewhat strange (but useful!) equipment.
 ### [LambDynamicLights](https://github.com/LambdAurora/LambDynamicLights) and [Cloth Config](https://github.com/shedaniel/cloth-config) are recommended for full functionality.
